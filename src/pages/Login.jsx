@@ -11,7 +11,6 @@ function Login() {
     const MIN_LENGTH = 5;
     const passwordValidation = password.length > MIN_LENGTH;
     const validate = emailValidation && passwordValidation;
-    console.log(password.length);
     setDisabled(!validate);
   };
 
