@@ -14,6 +14,11 @@ function Login() {
     setDisabled(!validate);
   }, [email, password]);
 
+  const handleButton = () => {
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+  };
+
   return (
     <main>
       <h1>Login</h1>
@@ -33,6 +38,7 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ disabled }
+        onClick={ handleButton }
       >
         Enter
       </button>
