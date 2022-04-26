@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
 
-  const inputsValidate = () => {
+  useEffect(() => {
     const regex = /\S+@\S+\.\S+/;
     const emailValidation = regex.test(email);
-    const MIN_LENGTH = 5;
+    const MIN_LENGTH = 6;
     const passwordValidation = password.length > MIN_LENGTH;
     const validate = emailValidation && passwordValidation;
     setDisabled(!validate);
-  };
+  }, [email, password]);
 
   return (
     <main>
@@ -21,19 +21,13 @@ function Login() {
         type="text"
         data-testid="email-input"
         value={ email }
-        onChange={ (e) => {
-          setEmail(e.target.value);
-          inputsValidate();
-        } }
+        onChange={ (e) => setEmail(e.target.value) }
       />
       <input
         type="password"
         data-testid="password-input"
         value={ password }
-        onChange={ (e) => {
-          setPassword(e.target.value);
-          inputsValidate();
-        } }
+        onChange={ (e) => setPassword(e.target.value) }
       />
       <button
         type="button"
