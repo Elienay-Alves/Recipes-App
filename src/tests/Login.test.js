@@ -32,4 +32,12 @@ describe('Testa o componente Login', () => {
     userEvent.type(emailInput, email);
     expect(emailInput.value).toBe(email);
   });
+
+  test('Testa se é possível escrever no input-password', () => {
+    renderWithRouter(<Login />);
+    const passwordInput = screen.getByTestId('password-input');
+    const password = '123456';
+    userEvent.type(passwordInput, password);
+    expect(passwordInput.value).toBe(password);
+  });
 });
