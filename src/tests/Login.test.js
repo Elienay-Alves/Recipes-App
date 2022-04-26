@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import Login from '../pages/Login';
 import RecipeContext from '../context/RecipeContext';
@@ -22,5 +23,13 @@ describe('Testa o componente Login', () => {
     expect(passwordInput).toBeInTheDocument();
     expect(button).toBeInTheDocument();
     expect(title).toBeInTheDocument();
+  });
+
+  test('Testa se é possível escrever no input-email', () => {
+    renderWithRouter(<Login />);
+    const emailInput = screen.getByTestId('email-input');
+    const email = 'trybe@trybe.com';
+    userEvent.type(emailInput, email);
+    expect(emailInput.value).toBe(email);
   });
 });
