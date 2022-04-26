@@ -33,4 +33,11 @@ describe('Testa o componente Login', () => {
     userEvent.type(passwordInput, password);
     expect(passwordInput.value).toBe(password);
   });
+
+  test('Testa se a função handleButton é chamada', () => {
+    const { customHistory } = renderWithRouter(<Login />);
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+    expect(customHistory.location.pathname).toBe('/foods');
+  });
 });

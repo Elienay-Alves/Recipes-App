@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -17,6 +18,7 @@ function Login() {
   const handleButton = () => {
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
+    localStorage.setItem('user', JSON.stringify({ email }));
   };
 
   return (
@@ -34,14 +36,17 @@ function Login() {
         value={ password }
         onChange={ (e) => setPassword(e.target.value) }
       />
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ disabled }
-        onClick={ handleButton }
-      >
-        Enter
-      </button>
+      <Link to="/foods">
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ disabled }
+          onClick={ handleButton }
+        >
+          Enter
+        </button>
+      </Link>
+
     </main>
   );
 }
