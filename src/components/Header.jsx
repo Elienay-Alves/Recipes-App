@@ -4,6 +4,16 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header() {
+  const history = useHistory();
+  const [searchBtnVisible, setSearchBtnVisible] = useState(false);
+  const handleClickProfileBtn = () => {
+    history.push('/profile');
+  };
+
+  const handleClickSearchBtn = () => {
+    setSearchBtnVisible(!searchBtnVisible);
+  };
+
   return (
     <header className="d-flex flex-column">
       <section className="d-flex justify-content-between">
@@ -23,6 +33,8 @@ function Header() {
           <img src={ searchIcon } alt="search icon" />
         </button>
       </section>
+      {searchBtnVisible ? <input type="text" name="search" data-testid="search-input" />
+        : ''}
     </header>
   );
 }
