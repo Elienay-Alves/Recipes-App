@@ -42,7 +42,38 @@ function Header({ title }) {
           </button>
         ) : ''}
       </section>
-      {searchBtnVisible ? <input type="text" name="search" data-testid="search-input" />
+      {searchBtnVisible ? (
+        <>
+          <input type="text" name="search" data-testid="search-input" />
+          <label htmlFor="Ingredient">
+            <input
+              type="radio"
+              data-testid="ingredient-search-radio"
+              name="Ingredient"
+              id="Ingredient"
+            />
+            Ingredient
+          </label>
+          <label htmlFor="Name">
+            <input
+              type="radio"
+              data-testid="name-search-radio"
+              name="Name"
+              id="Name"
+            />
+            Name
+          </label>
+          <label htmlFor="First Letter">
+            <input
+              type="radio"
+              data-testid="first-letter-search-radio"
+              name="First Letter"
+              id="First Letter"
+            />
+            First Letter
+          </label>
+          <button type="button" data-testid="exec-search-btn">Search</button>
+        </>)
         : ''}
     </header>
   );
