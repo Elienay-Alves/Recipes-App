@@ -23,7 +23,7 @@ function Header({ title }) {
     if (radio === 'First Letter' && search.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      const responseFood = await requestFood(radio, search);
+      const responseFood = await requestFood(history.location.pathname, radio, search);
       console.log(responseFood);
     }
     setSearchInput('');
