@@ -10,15 +10,15 @@ function CardRecipes() {
     <main>
       { recipes
         && recipes.map((recipe, index) => {
-          let listRecipe = {};
+          let listRecipes = {};
           switch (pathname) {
           case '/foods':
-            listRecipe = { thumb: recipe.strMealThumb,
+            listRecipes = { thumb: recipe.strMealThumb,
               name: recipe.strMeal,
             };
             break;
           case '/drinks':
-            listRecipe = { thumb: recipe.strDrinkThumb,
+            listRecipes = { thumb: recipe.strDrinkThumb,
               name: recipe.strDrink,
             };
             break;
@@ -29,13 +29,13 @@ function CardRecipes() {
           return (
             <section key={ index } data-testid={ `${index}-recipe-card` }>
               <h2 data-testid={ `${index}-card-name` }>
-                { listRecipe.name }
+                { listRecipes.name }
               </h2>
               <img
                 width="100px"
                 height="100px"
                 data-testid={ `${index}-card-img` }
-                src={ listRecipe.thumb }
+                src={ listRecipes.thumb }
                 alt=""
               />
             </section>);
