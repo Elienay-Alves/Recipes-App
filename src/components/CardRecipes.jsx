@@ -36,7 +36,7 @@ function CardRecipes() {
                 height="100px"
                 data-testid={ `${index}-card-img` }
                 src={ listRecipes.thumb }
-                alt=""
+                alt={ listRecipes.name }
               />
             </section>);
         })}
