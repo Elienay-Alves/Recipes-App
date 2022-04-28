@@ -1,35 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import CardRecipes from '../components/CardRecipes';
-import foodApiRequest from '../helpers/foodApiRequest';
 import filterFoodByCategory from '../helpers/filterFoodByCategory';
 import foodCategoriesRequest from '../helpers/foodCategoriesRequest';
+import RecipeContext from '../context/RecipeContext';
 import Footer from '../components/Footer';
 
 function Foods() {
-  const [foods, setFoods] = useState([]);
+  const { foods, setFoods, defaultFoods,
+    foodRequest, setRecipes } = useContext(RecipeContext);
   const [categories, setCategories] = useState([]);
-  const [defaultFoods, setDefaultFoods] = useState([]);
 
   const categoriesRequest = async () => {
     const request = await foodCategoriesRequest();
     setCategories(request);
   };
 
-  const foodRequest = async () => {
-    const request = await foodApiRequest();
-    setFoods(request);
-    setDefaultFoods(request);
-  };
-
   useEffect(() => {
-    foodRequest();
     categoriesRequest();
   }, []);
 
   const handleButton = async (category) => {
+    setRecipes([]);
     const requestFilteredFood = await filterFoodByCategory(category);
+    if (foods.length < 1) setFoods(defaultFoods);
     if (requestFilteredFood[0].idMeal !== foods[0].idMeal) {
       setFoods(requestFilteredFood);
     } else {
@@ -40,8 +35,6 @@ function Foods() {
   return (
     <>
       <Header title="Foods" />
-      <h1>Foods</h1>
-      <CardRecipes />
       <div>
         { categories.map((category) => (
           <button
@@ -61,6 +54,7 @@ function Foods() {
           All
         </button>
       </div>
+      <CardRecipes />
       { foods.map((food, index) => (
         <Link
           key={ food.idMeal }
