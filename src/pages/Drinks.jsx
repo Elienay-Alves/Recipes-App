@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import drinkApiRequest from '../helpers/drinkApiRequest';
 import drinkCategoriesRequest from '../helpers/drinkCategoriesRequest';
 import filterDrinkByCategory from '../helpers/filterDrinkByCategory';
+import Footer from '../components/Footer';
 
 function Drinks() {
   const [drinks, setDrinks] = useState([]);
@@ -74,6 +75,7 @@ function Drinks() {
           </div>
         </Link>
       )) }
+      <Footer />
     </>
   );
 }

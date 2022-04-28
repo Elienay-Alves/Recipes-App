@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import foodApiRequest from '../helpers/foodApiRequest';
 import foodCategoriesRequest from '../helpers/foodCategoriesRequest';
 import filterFoodByCategory from '../helpers/filterFoodByCategory';
+import Footer from '../components/Footer';
 
 function Foods() {
   const [foods, setFoods] = useState([]);
@@ -74,6 +75,7 @@ function Foods() {
           </div>
         </Link>
       )) }
+      <Footer />
     </>
   );
 }
