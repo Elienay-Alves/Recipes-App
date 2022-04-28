@@ -8,7 +8,7 @@ async function requestFood(pathName, radioValue, searchInput) {
     case 'Name':
       ENDPOINT = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`;
       break;
-    case 'First Letter':
+    case 'First-Letter':
       ENDPOINT = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchInput}`;
       break;
     default:
@@ -32,7 +32,7 @@ async function requestFood(pathName, radioValue, searchInput) {
     case 'Name':
       ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchInput}`;
       break;
-    case 'First Letter':
+    case 'First-Letter':
       ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchInput}`;
       break;
     default:

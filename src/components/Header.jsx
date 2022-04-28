@@ -20,11 +20,18 @@ function Header({ title }) {
   };
 
   const searchFood = async (radio, search) => {
-    if (radio === 'First Letter' && search.length > 1) {
+    const { pathname } = history.location;
+    if (radio === 'First-Letter' && search.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      const responseFood = await requestFood(history.location.pathname, radio, search);
-      console.log(responseFood);
+      const responseFoodOrDrink = await requestFood(pathname, radio, search);
+      console.log(responseFoodOrDrink);
+      if (pathname === '/foods' && responseFoodOrDrink.length === 1) {
+        history.push(`foods/${responseFoodOrDrink[0].idMeal}`);
+      }
+      if (pathname === '/drinks' && responseFoodOrDrink.length === 1) {
+        history.push(`drinks/${responseFoodOrDrink[0].idDrink}`);
+      }
     }
     setSearchInput('');
   };
@@ -65,36 +72,41 @@ function Header({ title }) {
             value={ searchInput }
             onChange={ ({ target: { value } }) => setSearchInput(value) }
           />
-          <label htmlFor="Ingredient">
-            <input
-              type="radio"
-              data-testid="ingredient-search-radio"
-              name="Ingredient"
-              id="Ingredient"
-              onChange={ ({ target: { name } }) => setRadioValue(name) }
-            />
-            Ingredient
-          </label>
-          <label htmlFor="Name">
-            <input
-              type="radio"
-              data-testid="name-search-radio"
-              name="Name"
-              id="Name"
-              onChange={ ({ target: { name } }) => setRadioValue(name) }
-            />
-            Name
-          </label>
-          <label htmlFor="First Letter">
-            <input
-              type="radio"
-              data-testid="first-letter-search-radio"
-              name="First Letter"
-              id="First Letter"
-              onChange={ ({ target: { name } }) => setRadioValue(name) }
-            />
-            First Letter
-          </label>
+          <form>
+            <label htmlFor="Ingredient">
+              <input
+                type="radio"
+                data-testid="ingredient-search-radio"
+                name="First-Filter"
+                value="Ingredient"
+                id="Ingredient"
+                onChange={ ({ target: { value } }) => setRadioValue(value) }
+              />
+              Ingredient
+            </label>
+            <label htmlFor="Name">
+              <input
+                type="radio"
+                data-testid="name-search-radio"
+                name="First-Filter"
+                value="Name"
+                id="Name"
+                onChange={ ({ target: { value } }) => setRadioValue(value) }
+              />
+              Name
+            </label>
+            <label htmlFor="First-Letter">
+              <input
+                type="radio"
+                data-testid="first-letter-search-radio"
+                name="First-Filter"
+                value="First-Letter"
+                id="First-Letter"
+                onChange={ ({ target: { value } }) => setRadioValue(value) }
+              />
+              First Letter
+            </label>
+          </form>
           <button
             type="button"
             data-testid="exec-search-btn"
