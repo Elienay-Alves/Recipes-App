@@ -10,7 +10,7 @@ function Header({ title }) {
   const history = useHistory();
   const { pathname } = history.location;
 
-  const { setRecipes } = useContext(RecipeContext);
+  const { setRecipes, setFoods, setDrinks } = useContext(RecipeContext);
 
   const [searchBtnVisible, setSearchBtnVisible] = useState(false);
   const [radioValue, setRadioValue] = useState('');
@@ -40,6 +40,8 @@ function Header({ title }) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
     setSearchInput('');
+    setFoods([]);
+    setDrinks([]);
   };
 
   return (

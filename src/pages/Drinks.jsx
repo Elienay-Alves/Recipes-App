@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom/';
+import RecipeContext from '../context/RecipeContext';
 import Header from '../components/Header';
 import CardRecipes from '../components/CardRecipes';
-import drinkApiRequest from '../helpers/drinkApiRequest';
 import drinkCategoriesRequest from '../helpers/drinkCategoriesRequest';
 import filterDrinkByCategory from '../helpers/filterDrinkByCategory';
 import Footer from '../components/Footer';
 
 function Drinks() {
-  const [drinks, setDrinks] = useState([]);
+  const { drinks, setDrinks, defaultDrinks,
+    drinkRequest, setRecipes } = useContext(RecipeContext);
   const [categories, setCategories] = useState([]);
-  const [defaultDrinks, setDefaultDrinks] = useState([]);
-
-  const drinkRequest = async () => {
-    const request = await drinkApiRequest();
-    setDrinks(request);
-    setDefaultDrinks(request);
-  };
 
   const categoriesRequest = async () => {
     const request = await drinkCategoriesRequest();
@@ -24,12 +18,13 @@ function Drinks() {
   };
 
   useEffect(() => {
-    drinkRequest();
     categoriesRequest();
   }, []);
 
   const handleButton = async (category) => {
+    setRecipes([]);
     const requestFilteredDrink = await filterDrinkByCategory(category);
+    if (drinks.length < 1) setDrinks(defaultDrinks);
     if (requestFilteredDrink[0].idDrink !== drinks[0].idDrink) {
       setDrinks(requestFilteredDrink);
     } else {
@@ -40,8 +35,6 @@ function Drinks() {
   return (
     <>
       <Header title="Drinks" />
-      <h1>Drink</h1>
-      <CardRecipes />
       <div>
         { categories.map((category) => (
           <button
@@ -61,6 +54,7 @@ function Drinks() {
           All
         </button>
       </div>
+      <CardRecipes />
       { drinks.map((drink, index) => (
         <Link
           key={ drink.idDrink }
