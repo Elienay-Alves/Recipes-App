@@ -17,12 +17,13 @@ async function requestFood(pathName, radioValue, searchInput) {
     try {
       const response = await fetch(ENDPOINT);
       const data = await response.json();
-      return data.meals;
+      const NUMBER_FOODS = 12;
+      const meals = data.meals.slice(0, NUMBER_FOODS);
+      return meals;
     } catch (error) {
       global.alert(`Erro ao realizar a requisição da API: ${error}`);
     }
   }
-
   if (pathName === '/drinks') {
     let ENDPOINT = '';
     switch (radioValue) {
@@ -41,7 +42,9 @@ async function requestFood(pathName, radioValue, searchInput) {
     try {
       const response = await fetch(ENDPOINT);
       const data = await response.json();
-      return data.drinks;
+      const NUMBER_DRINKS = 12;
+      const drinks = data.drinks.slice(0, NUMBER_DRINKS);
+      return drinks;
     } catch (error) {
       global.alert(`Erro ao realizar a requisição da API: ${error}`);
     }

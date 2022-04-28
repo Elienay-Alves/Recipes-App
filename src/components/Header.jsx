@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import RecipeContext from '../context/RecipeContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import requestFood from '../services/requestAPI';
 
 function Header({ title }) {
   const history = useHistory();
+  const { setRecipes } = useContext(RecipeContext);
   const [searchBtnVisible, setSearchBtnVisible] = useState(false);
   const [radioValue, setRadioValue] = useState('');
   const [searchInput, setSearchInput] = useState('');
@@ -26,6 +28,7 @@ function Header({ title }) {
     } else {
       const responseFoodOrDrink = await requestFood(pathname, radio, search);
       console.log(responseFoodOrDrink);
+      setRecipes(responseFoodOrDrink);
       if (pathname === '/foods' && responseFoodOrDrink.length === 1) {
         history.push(`foods/${responseFoodOrDrink[0].idMeal}`);
       }
