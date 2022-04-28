@@ -8,7 +8,10 @@ import requestFood from '../services/requestAPI';
 
 function Header({ title }) {
   const history = useHistory();
+  const { pathname } = history.location;
+
   const { setRecipes } = useContext(RecipeContext);
+
   const [searchBtnVisible, setSearchBtnVisible] = useState(false);
   const [radioValue, setRadioValue] = useState('');
   const [searchInput, setSearchInput] = useState('');
@@ -22,19 +25,19 @@ function Header({ title }) {
   };
 
   const searchFood = async (radio, search) => {
-    const { pathname } = history.location;
     if (radio === 'First-Letter' && search.length > 1) {
       global.alert('Your search must have only 1 (one) character');
+    }
+    const responseRecipe = await requestFood(pathname, radio, search);
+    if (responseRecipe) {
+      if (pathname === '/foods' && responseRecipe.length === 1) {
+        history.push(`foods/${responseRecipe[0].idMeal}`);
+      } else if (pathname === '/drinks' && responseRecipe.length === 1) {
+        history.push(`drinks/${responseRecipe[0].idDrink}`);
+      }
+      setRecipes(responseRecipe);
     } else {
-      const responseFoodOrDrink = await requestFood(pathname, radio, search);
-      console.log(responseFoodOrDrink);
-      setRecipes(responseFoodOrDrink);
-      if (pathname === '/foods' && responseFoodOrDrink.length === 1) {
-        history.push(`foods/${responseFoodOrDrink[0].idMeal}`);
-      }
-      if (pathname === '/drinks' && responseFoodOrDrink.length === 1) {
-        history.push(`drinks/${responseFoodOrDrink[0].idDrink}`);
-      }
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
     setSearchInput('');
   };
