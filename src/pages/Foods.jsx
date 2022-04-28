@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import foodApiRequest from '../helpers/foodApiRequest';
-import foodCategoriesRequest from '../helpers/foodCategoriesRequest';
 import filterFoodByCategory from '../helpers/filterFoodByCategory';
+import foodCategoriesRequest from '../helpers/foodCategoriesRequest';
 import Footer from '../components/Footer';
 
 function Foods() {
