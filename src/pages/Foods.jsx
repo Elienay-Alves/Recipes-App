@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import CardRecipes from '../components/CardRecipes';
 import foodApiRequest from '../helpers/foodApiRequest';
 import filterFoodByCategory from '../helpers/filterFoodByCategory';
 import foodCategoriesRequest from '../helpers/foodCategoriesRequest';
@@ -40,6 +41,7 @@ function Foods() {
     <>
       <Header title="Foods" />
       <h1>Foods</h1>
+      <CardRecipes />
       <div>
         { categories.map((category) => (
           <button
