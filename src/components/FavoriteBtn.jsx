@@ -7,8 +7,9 @@ function FavoriteBtn({ src, meal, drink, setFavoriteSrc }) {
   const isMeal = Object.keys(meal).length > 0;
   const handleFavoriteBtn = (e) => {
     if (e.target.src.includes('white')) {
+      const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
       if (isMeal) {
-        const newFav = [{
+        const newFav = {
           id: meal.idMeal,
           type: 'food',
           nationality: meal.strArea,
@@ -16,10 +17,11 @@ function FavoriteBtn({ src, meal, drink, setFavoriteSrc }) {
           alcoholicOrNot: '',
           name: meal.strMeal,
           image: meal.strMealThumb,
-        }];
-        localStorage.setItem('favoriteRecipes', JSON.stringify(newFav));
+        };
+        const newFavArray = [...favoriteRecipes, newFav];
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavArray));
       } else {
-        const newFav = [{
+        const newFav = {
           id: drink.idDrink,
           type: 'drink',
           nationality: '',
@@ -27,8 +29,9 @@ function FavoriteBtn({ src, meal, drink, setFavoriteSrc }) {
           alcoholicOrNot: drink.strAlcoholic,
           name: drink.strDrink,
           image: drink.strDrinkThumb,
-        }];
-        localStorage.setItem('favoriteRecipes', JSON.stringify(newFav));
+        };
+        const newFavArray = [...favoriteRecipes, newFav];
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavArray));
       }
       setFavoriteSrc(blackHeart);
     } else {
