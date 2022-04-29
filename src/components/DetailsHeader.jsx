@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
-// import blackHeart from '../images/blackHeartIcon.svg';
+import blackHeart from '../images/blackHeartIcon.svg';
 
 function DetailsHeader({ meal = {}, drink = {} }) {
   const [copiedVisible, setCopiedVisible] = useState(false);
+  const [favoriteSrc, setFavoriteSrc] = useState(whiteHeart);
   const isMeal = Object.keys(meal).length > 0;
+
+  const handleFavoriteBtn = (e) => {
+    if (e.target.src.includes('white')) {
+      setFavoriteSrc(blackHeart);
+    } else {
+      setFavoriteSrc(whiteHeart);
+    }
+  };
+
+  useEffect(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favoriteRecipes.some((favRecipe) => favRecipe.id === meal.idMeal
+    || favRecipe.id === drink.idDrink)) {
+      setFavoriteSrc(blackHeart);
+    }
+  }, []);
 
   return (
     <section>
@@ -36,10 +53,10 @@ function DetailsHeader({ meal = {}, drink = {} }) {
           </button>
           <button
             type="button"
-            // onClick={ handleClickProfileBtn }
+            onClick={ handleFavoriteBtn }
           >
             <img
-              src={ whiteHeart }
+              src={ favoriteSrc }
               alt="share icon"
               data-testid="favorite-btn"
             />
