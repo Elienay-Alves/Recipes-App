@@ -1,6 +1,6 @@
 async function requestFood(pathName, radioValue, searchInput) {
   const NUMBER_RECIPES = 12;
-  if (pathName === '/foods') {
+  if (pathName === '/foods' || pathName === '/explore/foods/ingredients') {
     let ENDPOINT = '';
     switch (radioValue) {
     case 'Ingredient':
@@ -24,7 +24,7 @@ async function requestFood(pathName, radioValue, searchInput) {
       global.alert(`Erro ao realizar a requisição da API: ${error}`);
     }
   }
-  if (pathName === '/drinks') {
+  if (pathName === '/drinks' || pathName === '/explore/drinks/ingredients') {
     let ENDPOINT = '';
     switch (radioValue) {
     case 'Ingredient':

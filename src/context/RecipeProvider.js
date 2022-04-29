@@ -7,7 +7,7 @@ import { foodIngredients, drinkIngredients } from '../helpers/foodAndDrinkIngred
 import RecipeContext from './RecipeContext';
 
 function RecipeProvider({ children }) {
-  const [recipes, setRecipes] = useState(null);
+  const [recipes, setRecipes] = useState([]);
   const [foods, setFoods] = useState([]);
   const [defaultFoods, setDefaultFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);

@@ -1,41 +1,58 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import RecipeContext from '../context/RecipeContext';
+import requestFood from '../services/requestAPI';
 
 function CardIngredients() {
-  const { foodIngredientsList, drinkIngredientsList } = useContext(RecipeContext);
+  const { foodIngredientsList, drinkIngredientsList,
+    setRecipes, setFoods, setDrinks } = useContext(RecipeContext);
   const history = useHistory();
   const { pathname } = history.location;
+
+  const sendIngredient = async (ingredient) => {
+    const responseRecipe = await requestFood(pathname, 'Ingredient', ingredient);
+    console.log(responseRecipe);
+    setRecipes(responseRecipe);
+    setFoods([]);
+    setDrinks([]);
+  };
+
   return (
     <main>
       { pathname === '/explore/foods/ingredients'
         ? foodIngredientsList.map(({ strIngredient }, index) => (
-          <section key={ index } data-testid={ `${index}-ingredient-card` }>
-            <Link to="/foods">
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-                alt={ strIngredient }
-              />
-              <h1 data-testid={ `${index}-card-name` }>
-                { strIngredient }
-              </h1>
-            </Link>
-          </section>
+          <Link
+            to="/foods"
+            onClick={ () => sendIngredient(strIngredient) }
+            key={ index }
+            data-testid={ `${index}-ingredient-card` }
+          >
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+              alt={ strIngredient }
+            />
+            <h1 data-testid={ `${index}-card-name` }>
+              { strIngredient }
+            </h1>
+          </Link>
         )) : (
           drinkIngredientsList.map(({ strIngredient1 }, index) => (
-            <section key={ index } data-testid={ `${index}-ingredient-card` }>
-              <Link to="/drinks">
-                <img
-                  data-testid={ `${index}-card-img` }
-                  src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
-                  alt={ strIngredient1 }
-                />
-                <h1 data-testid={ `${index}-card-name` }>
-                  { strIngredient1 }
-                </h1>
-              </Link>
-            </section>
+            <Link
+              to="/drinks"
+              onClick={ () => sendIngredient(strIngredient1) }
+              key={ index }
+              data-testid={ `${index}-ingredient-card` }
+            >
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
+                alt={ strIngredient1 }
+              />
+              <h1 data-testid={ `${index}-card-name` }>
+                { strIngredient1 }
+              </h1>
+            </Link>
           ))
         )}
     </main>
