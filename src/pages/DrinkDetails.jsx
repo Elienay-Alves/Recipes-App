@@ -29,7 +29,7 @@ function DrinkDetails() {
           <Ingredients drink={ drink } />
           <Instructions drink={ drink } />
           <Recommended />
-          <DetailsPageBtn />
+          <DetailsPageBtn drink={ drink } />
         </>
       ) : ''}
     </>

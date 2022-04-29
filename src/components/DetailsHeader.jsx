@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 // import blackHeart from '../images/blackHeartIcon.svg';
 
 function DetailsHeader({ meal = {}, drink = {} }) {
+  const [copiedVisible, setCopiedVisible] = useState(false);
   const isMeal = Object.keys(meal).length > 0;
+
   return (
     <section>
       <img
@@ -21,7 +23,10 @@ function DetailsHeader({ meal = {}, drink = {} }) {
         <div>
           <button
             type="button"
-            // onClick={ handleClickProfileBtn }
+            onClick={ () => {
+              navigator.clipboard.writeText(window.location.href);
+              setCopiedVisible(true);
+            } }
           >
             <img
               src={ shareIcon }
@@ -41,6 +46,7 @@ function DetailsHeader({ meal = {}, drink = {} }) {
           </button>
         </div>
       </div>
+      {copiedVisible ? <p>Link copied!</p> : ''}
       <span data-testid="recipe-category">
         { isMeal ? meal.strCategory : drink.strAlcoholic }
       </span>

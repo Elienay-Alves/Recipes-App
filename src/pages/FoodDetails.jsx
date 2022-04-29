@@ -41,7 +41,7 @@ function FoodDetails() {
             data-testid="video"
           />
           <Recommended />
-          <DetailsPageBtn />
+          <DetailsPageBtn meal={ meal } />
         </>
       ) : ''}
     </>
