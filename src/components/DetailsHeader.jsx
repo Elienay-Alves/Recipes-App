@@ -6,7 +6,7 @@ import whiteHeart from '../images/whiteHeartIcon.svg';
 
 function DetailsHeader({ meal = {}, drink = {} }) {
   const isMeal = Object.keys(meal).length > 0;
-  console.log(drink);
+  console.log(meal);
   return (
     <section>
       <img

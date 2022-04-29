@@ -5,7 +5,7 @@ function DrinkDetails() {
   const [drink, setDrink] = useState({});
 
   const fetchDrink = async () => {
-    // 11007 drinkId para teste
+    // 178319 drinkId para teste
     const drinkId = window.location.pathname.split('/')[2];
     const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`;
     const response = await fetch(url);
