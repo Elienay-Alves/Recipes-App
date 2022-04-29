@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import foodApiRequest from '../helpers/foodApiRequest';
 import drinkApiRequest from '../helpers/drinkApiRequest';
 import { foodRandom, drinkRandom } from '../helpers/foodAndDrinkRandomApi';
+import { foodIngredients, drinkIngredients } from '../helpers/foodAndDrinkIngredientsApi';
 import RecipeContext from './RecipeContext';
 
 function RecipeProvider({ children }) {
@@ -13,6 +14,8 @@ function RecipeProvider({ children }) {
   const [defaultDrinks, setDefaultDrinks] = useState([]);
   const [idFoodRandom, setIdFoodRandom] = useState([]);
   const [idDrinkRandom, setIdDrinkRandom] = useState([]);
+  const [foodIngredientsList, setFoodIngredientsList] = useState([]);
+  const [drinkIngredientsList, setDrinkIngredientsList] = useState([]);
 
   const drinkRequest = async () => {
     const request = await drinkApiRequest();
@@ -33,10 +36,18 @@ function RecipeProvider({ children }) {
     setIdDrinkRandom(responseDrink);
   };
 
+  const foodAndDrinkIngredientsRequest = async () => {
+    const responseFood = await foodIngredients();
+    const responseDrink = await drinkIngredients();
+    setFoodIngredientsList(responseFood);
+    setDrinkIngredientsList(responseDrink);
+  };
+
   useEffect(() => {
     foodRequest();
     drinkRequest();
     foodAndDrinkRandomRequest();
+    foodAndDrinkIngredientsRequest();
   }, []);
 
   const contextValue = {
@@ -54,6 +65,8 @@ function RecipeProvider({ children }) {
     drinkRequest,
     idFoodRandom,
     idDrinkRandom,
+    foodIngredientsList,
+    drinkIngredientsList,
   };
 
   return (
