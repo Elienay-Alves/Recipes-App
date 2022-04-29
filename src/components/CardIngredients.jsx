@@ -11,7 +11,6 @@ function CardIngredients() {
 
   const sendIngredient = async (ingredient) => {
     const responseRecipe = await requestFood(pathname, 'Ingredient', ingredient);
-    console.log(responseRecipe);
     setRecipes(responseRecipe);
     setFoods([]);
     setDrinks([]);
