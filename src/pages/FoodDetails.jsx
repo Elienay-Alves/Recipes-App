@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DetailsHeader from '../components/DetailsHeader';
 import Ingredients from '../components/Ingredients';
+import Instructions from '../components/Instructions';
+import Recommended from '../components/Recommended';
+import DetailsPageBtn from '../components/DetailsPageBtn';
 
 function FoodDetails() {
   const [meal, setMeal] = useState({});
@@ -13,6 +16,7 @@ function FoodDetails() {
     const data = await response.json();
     setMeal(data.meals[0]);
   };
+
   useEffect(() => {
     fetchMeal();
   }, []);
@@ -20,8 +24,26 @@ function FoodDetails() {
   return (
     <>
       <h1>FoodDetails</h1>
-      <DetailsHeader meal={ meal } />
-      <Ingredients meal={ meal } />
+      {Object.keys(meal).length > 0 ? (
+        <>
+          <DetailsHeader meal={ meal } />
+          <Ingredients meal={ meal } />
+          <Instructions meal={ meal } />
+          <iframe
+            width="560"
+            height="315"
+            src={ meal.strYoutube.replace('watch?v=', 'embed/') }
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write;
+            encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            data-testid="video"
+          />
+          <Recommended />
+          <DetailsPageBtn />
+        </>
+      ) : ''}
     </>
   );
 }

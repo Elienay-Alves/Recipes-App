@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DetailsHeader from '../components/DetailsHeader';
+import Ingredients from '../components/Ingredients';
+import Instructions from '../components/Instructions';
+import Recommended from '../components/Recommended';
+import DetailsPageBtn from '../components/DetailsPageBtn';
 
 function DrinkDetails() {
   const [drink, setDrink] = useState({});
@@ -19,7 +23,15 @@ function DrinkDetails() {
   return (
     <>
       <h1>DrinkDetails</h1>
-      <DetailsHeader drink={ drink } />
+      {Object.keys(drink).length > 0 ? (
+        <>
+          <DetailsHeader drink={ drink } />
+          <Ingredients drink={ drink } />
+          <Instructions drink={ drink } />
+          <Recommended />
+          <DetailsPageBtn />
+        </>
+      ) : ''}
     </>
   );
 }

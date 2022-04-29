@@ -6,7 +6,6 @@ import whiteHeart from '../images/whiteHeartIcon.svg';
 
 function DetailsHeader({ meal = {}, drink = {} }) {
   const isMeal = Object.keys(meal).length > 0;
-  console.log(meal);
   return (
     <section>
       <img
@@ -43,15 +42,20 @@ function DetailsHeader({ meal = {}, drink = {} }) {
         </div>
       </div>
       <span data-testid="recipe-category">
-        { isMeal ? meal.strCategory : drink.strCategory }
+        { isMeal ? meal.strCategory : drink.strAlcoholic }
       </span>
     </section>
   );
 }
 
 DetailsHeader.propTypes = {
-  meal: PropTypes.objectOf(PropTypes.any).isRequired,
-  drink: PropTypes.objectOf(PropTypes.any).isRequired,
+  meal: PropTypes.objectOf(PropTypes.any),
+  drink: PropTypes.objectOf(PropTypes.any),
+};
+
+DetailsHeader.defaultProps = {
+  meal: {},
+  drink: {},
 };
 
 export default DetailsHeader;
