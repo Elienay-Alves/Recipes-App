@@ -5,6 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 
+const FIVE = 5;
 function DetailsHeader({ meal = {}, drink = {} }) {
   const [copiedVisible, setCopiedVisible] = useState(false);
   const [favoriteSrc, setFavoriteSrc] = useState(whiteHeart);
@@ -34,7 +35,8 @@ function DetailsHeader({ meal = {}, drink = {} }) {
           <button
             type="button"
             onClick={ () => {
-              navigator.clipboard.writeText(window.location.href);
+              navigator.clipboard.writeText(window.location.href
+                .split('/').slice(0, FIVE).join('/'));
               setCopiedVisible(true);
             } }
           >

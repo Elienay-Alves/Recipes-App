@@ -3,7 +3,6 @@ import DetailsHeader from '../components/DetailsHeader';
 import RecipeContext from '../context/RecipeContext';
 import IngredientsInProgress from '../components/IngredientsInProgress';
 import Instructions from '../components/Instructions';
-import FinishRecipeBtn from '../components/FinishRecipeBtn';
 
 function FoodsInProgress() {
   const [meal, setMeal] = useState({});
@@ -21,7 +20,6 @@ function FoodsInProgress() {
           <DetailsHeader meal={ meal } />
           <IngredientsInProgress meal={ meal } />
           <Instructions meal={ meal } />
-          <FinishRecipeBtn />
         </>) : '' }
     </>
   );

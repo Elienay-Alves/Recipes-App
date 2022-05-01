@@ -78,3 +78,7 @@
 .overflow {
   overflow: auto;
 }
+
+.markedIngredient {
+  text-decoration: line-through;
+}
