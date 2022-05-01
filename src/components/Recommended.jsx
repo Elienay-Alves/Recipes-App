@@ -27,7 +27,6 @@ function Recommended() {
       }
       return '';
     });
-    console.log(recommendedArray);
     setRecommendedStuff(recommendedArray);
   };
 

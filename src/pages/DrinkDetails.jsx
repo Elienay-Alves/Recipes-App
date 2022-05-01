@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import DetailsHeader from '../components/DetailsHeader';
 import Ingredients from '../components/Ingredients';
 import Instructions from '../components/Instructions';
 import Recommended from '../components/Recommended';
 import DetailsPageBtn from '../components/DetailsPageBtn';
+import RecipeContext from '../context/RecipeContext';
 
 function DrinkDetails() {
   const [drink, setDrink] = useState({});
+  const { setWhatToFetch, recipe } = useContext(RecipeContext);
 
-  const fetchDrink = async () => {
-    // 178319 drinkId para teste
-    const drinkId = window.location.pathname.split('/')[2];
-    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setDrink(data.drinks[0]);
-  };
   useEffect(() => {
-    fetchDrink();
-  }, []);
+    setWhatToFetch('drink');
+    setDrink(recipe);
+  }, [recipe]);
 
   return (
     <>

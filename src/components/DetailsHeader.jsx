@@ -12,7 +12,6 @@ function DetailsHeader({ meal = {}, drink = {} }) {
 
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    console.log(favoriteRecipes);
     if (favoriteRecipes.some((favRecipe) => favRecipe.id === meal.idMeal
     || favRecipe.id === drink.idDrink)) {
       setFavoriteSrc(blackHeart);

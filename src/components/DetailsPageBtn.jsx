@@ -17,7 +17,6 @@ function DetailsPageBtn({ meal, drink }) {
   };
 
   const handleBtnText = () => {
-    console.log(drink);
     const isDone = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     if (isDone.some((recipe) => recipe.id === meal.idMeal
       || recipe.id === drink.idDrink)) {

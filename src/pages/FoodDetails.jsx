@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import DetailsHeader from '../components/DetailsHeader';
 import Ingredients from '../components/Ingredients';
 import Instructions from '../components/Instructions';
 import Recommended from '../components/Recommended';
 import DetailsPageBtn from '../components/DetailsPageBtn';
+import RecipeContext from '../context/RecipeContext';
 
 function FoodDetails() {
   const [meal, setMeal] = useState({});
-
-  const fetchMeal = async () => {
-    // 52771 id para teste
-    const mealId = window.location.pathname.split('/')[2];
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setMeal(data.meals[0]);
-  };
+  const { setWhatToFetch, recipe } = useContext(RecipeContext);
 
   useEffect(() => {
-    fetchMeal();
-  }, []);
+    setWhatToFetch('meal');
+    setMeal(recipe);
+  }, [recipe]);
 
   return (
     <>
