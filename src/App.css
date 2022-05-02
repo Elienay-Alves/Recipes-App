@@ -70,3 +70,19 @@ img {
     transform: rotate(-10deg);
   }
 }
+
+.recommendedSize {
+  width: 50vw;
+}
+
+.imgWidth {
+  width: 50vw;
+}
+
+.overflow {
+  overflow: auto;
+}
+
+.markedIngredient {
+  text-decoration: line-through;
+}
