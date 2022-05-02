@@ -4,7 +4,10 @@ import foodApiRequest from '../helpers/foodApiRequest';
 import drinkApiRequest from '../helpers/drinkApiRequest';
 import { foodRandom, drinkRandom } from '../helpers/foodAndDrinkRandomApi';
 import { foodIngredients, drinkIngredients } from '../helpers/foodAndDrinkIngredientsApi';
+import { foodNationalities, foodsByCountry } from '../helpers/foodNationalitiesRequest';
 import RecipeContext from './RecipeContext';
+
+const american = require('../helpers/mockAmerican');
 
 function RecipeProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
@@ -16,6 +19,8 @@ function RecipeProvider({ children }) {
   const [idDrinkRandom, setIdDrinkRandom] = useState([]);
   const [foodIngredientsList, setFoodIngredientsList] = useState([]);
   const [drinkIngredientsList, setDrinkIngredientsList] = useState([]);
+  const [foodByNationalities, setFoodByNationalities] = useState([]);
+  const [foodsCountry, setFoodsCountry] = useState(american.meals);
 
   const drinkRequest = async () => {
     const request = await drinkApiRequest();
@@ -43,11 +48,22 @@ function RecipeProvider({ children }) {
     setDrinkIngredientsList(responseDrink);
   };
 
+  const foodNationalitiesRequest = async () => {
+    const response = await foodNationalities();
+    setFoodByNationalities(response);
+  };
+
+  const foodAllByCountry = async (value) => {
+    const response = await foodsByCountry(value);
+    setFoodsCountry(response);
+  };
+
   useEffect(() => {
     foodRequest();
     drinkRequest();
     foodAndDrinkRandomRequest();
     foodAndDrinkIngredientsRequest();
+    foodNationalitiesRequest();
   }, []);
 
   const contextValue = {
@@ -67,6 +83,9 @@ function RecipeProvider({ children }) {
     idDrinkRandom,
     foodIngredientsList,
     drinkIngredientsList,
+    foodByNationalities,
+    foodsCountry,
+    foodAllByCountry,
   };
 
   return (

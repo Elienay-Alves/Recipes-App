@@ -25,7 +25,7 @@ function Login() {
     <main>
       <h1>Login</h1>
       <input
-        type="text"
+        type="email"
         data-testid="email-input"
         value={ email }
         onChange={ (e) => setEmail(e.target.value) }
