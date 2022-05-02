@@ -96,7 +96,7 @@ function IngredientsInProgress({ meal = {}, drink = {} }) {
             <input
               type="checkbox"
               name={ index }
-              checked={ doneIngredients.includes(JSON.stringify(index)) }
+              defaultChecked={ doneIngredients.includes(JSON.stringify(index)) }
               onChange={ handleIngredient }
             />
             {ingredient}
