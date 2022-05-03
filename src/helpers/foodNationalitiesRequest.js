@@ -12,10 +12,3 @@ export const foodsByCountry = async (country) => {
   const data = await response.json();
   return data.meals.slice(0, NUMBER_MAX);
 };
-
-export const requestFoodDetails = async (id) => {
-  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data.meals[0];
-};

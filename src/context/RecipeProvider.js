@@ -81,6 +81,9 @@ function RecipeProvider({ children }) {
   };
 
   const foodAllByCountry = async (value) => {
+    if (value === 'All') {
+      setFoodsCountry(foods);
+    }
     const response = await foodsByCountry(value);
     setFoodsCountry(response);
   };
