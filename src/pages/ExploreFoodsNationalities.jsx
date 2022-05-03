@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import RecipeContext from '../context/RecipeContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -26,16 +27,22 @@ function ExploreFoodsNationalities() {
       </select>
       { foodsCountry[0]
         && foodsCountry.map((food, index) => (
-          <section data-testid={ `${index}-recipe-card` } key={ index }>
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ food.strMealThumb }
-              alt=""
-            />
-            <p data-testid={ `${index}-card-name` }>
-              { food.strMeal }
-            </p>
-          </section>
+          <Link
+            to={ `/food/${food.idMeal}` }
+            key={ index }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <section>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ food.strMealThumb }
+                alt=""
+              />
+              <p data-testid={ `${index}-card-name` }>
+                { food.strMeal }
+              </p>
+            </section>
+          </Link>
         ))}
       <Footer />
     </>
