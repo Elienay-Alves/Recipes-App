@@ -5,7 +5,6 @@ import drinkApiRequest from '../helpers/drinkApiRequest';
 import RecipeContext from './RecipeContext';
 
 function RecipeProvider({ children }) {
-
   const [recipe, setRecipe] = useState({});
   const [whatToFetch, setWhatToFetch] = useState('');
   const [recipes, setRecipes] = useState(null);
@@ -39,7 +38,7 @@ function RecipeProvider({ children }) {
       fetchDrink();
     }
   }, [whatToFetch]);
-  
+
   const drinkRequest = async () => {
     const request = await drinkApiRequest();
     setDrinks(request);
