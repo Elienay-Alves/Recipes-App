@@ -12,8 +12,9 @@ function ExploreFoodsNationalities() {
       <Header title="Explore Nationalities" />
       <select
         data-testid="explore-by-nationality-dropdown"
-        onClick={ (e) => foodAllByCountry(e.target.value) }
+        onChange={ (e) => foodAllByCountry(e.target.value) }
       >
+        <option data-testid="All-option" value="All">All</option>
         {
           foodByNationalities.map(({ strArea }) => (
             <option
@@ -27,9 +28,10 @@ function ExploreFoodsNationalities() {
       </select>
       { foodsCountry[0]
           && foodsCountry.map(({ idMeal, strMealThumb, strMeal }, index) => (
-            <section key={ index } data-testid={ `${index}-recipe-card` }>
+            <section key={ index }>
               <Link
                 to={ `/foods/${idMeal}` }
+                data-testid={ `${index}-recipe-card` }
               >
                 <img
                   data-testid={ `${index}-card-img` }
