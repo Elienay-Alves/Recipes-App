@@ -31,9 +31,9 @@ function CardIngredients() {
               src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
               alt={ strIngredient }
             />
-            <h1 data-testid={ `${index}-card-name` }>
+            <p data-testid={ `${index}-card-name` }>
               { strIngredient }
-            </h1>
+            </p>
           </Link>
         )) : (
           drinkIngredientsList.map(({ strIngredient1 }, index) => (
@@ -48,9 +48,9 @@ function CardIngredients() {
                 src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
                 alt={ strIngredient1 }
               />
-              <h1 data-testid={ `${index}-card-name` }>
+              <p data-testid={ `${index}-card-name` }>
                 { strIngredient1 }
-              </h1>
+              </p>
             </Link>
           ))
         )}

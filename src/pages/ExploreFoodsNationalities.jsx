@@ -26,24 +26,22 @@ function ExploreFoodsNationalities() {
         }
       </select>
       { foodsCountry[0]
-        && foodsCountry.map((food, index) => (
-          <Link
-            to={ `/food/${food.idMeal}` }
-            key={ index }
-            data-testid={ `${index}-recipe-card` }
-          >
-            <section>
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ food.strMealThumb }
-                alt=""
-              />
-              <p data-testid={ `${index}-card-name` }>
-                { food.strMeal }
-              </p>
+          && foodsCountry.map(({ idMeal, strMealThumb, strMeal }, index) => (
+            <section key={ index } data-testid={ `${index}-recipe-card` }>
+              <Link
+                to={ `/foods/${idMeal}` }
+              >
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ strMealThumb }
+                  alt=""
+                />
+                <p data-testid={ `${index}-card-name` }>
+                  { strMeal }
+                </p>
+              </Link>
             </section>
-          </Link>
-        ))}
+          ))}
       <Footer />
     </>
   );

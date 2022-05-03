@@ -28,9 +28,9 @@ function CardRecipes() {
 
           return (
             <section key={ index } data-testid={ `${index}-recipe-card` }>
-              <h2 data-testid={ `${index}-card-name` }>
+              <p data-testid={ `${index}-card-name` }>
                 { listRecipes.name }
-              </h2>
+              </p>
               <img
                 width="100px"
                 height="100px"

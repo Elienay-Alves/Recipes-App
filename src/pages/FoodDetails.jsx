@@ -9,7 +9,7 @@ import RecipeContext from '../context/RecipeContext';
 function FoodDetails() {
   const [meal, setMeal] = useState({});
   const { setWhatToFetch, recipe } = useContext(RecipeContext);
-  console.log(meal);
+
   useEffect(() => {
     setWhatToFetch('meal');
     setMeal(recipe);
