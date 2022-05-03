@@ -49,7 +49,7 @@ function RecipeProvider({ children }) {
       fetchDrink();
     }
   }, [whatToFetch]);
-  
+
   const drinkRequest = async () => {
     const request = await drinkApiRequest();
     setDrinks(request);
