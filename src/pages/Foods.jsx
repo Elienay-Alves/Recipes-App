@@ -67,7 +67,7 @@ function Foods() {
               alt={ food.strMeal }
               data-testid={ `${index}-card-img` }
             />
-            <h3 data-testid={ `${index}-card-name` }>{ food.strMeal }</h3>
+            <p data-testid={ `${index}-card-name` }>{ food.strMeal }</p>
           </div>
         </Link>
       )) }

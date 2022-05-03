@@ -10,6 +10,5 @@ export const foodsByCountry = async (country) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`;
   const response = await fetch(URL);
   const data = await response.json();
-  console.log(data.meals.slice(0, NUMBER_MAX));
   return data.meals.slice(0, NUMBER_MAX);
 };

@@ -7,8 +7,6 @@ import { foodIngredients, drinkIngredients } from '../helpers/foodAndDrinkIngred
 import { foodNationalities, foodsByCountry } from '../helpers/foodNationalitiesRequest';
 import RecipeContext from './RecipeContext';
 
-const american = require('../helpers/mockAmerican');
-
 function RecipeProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState({});
@@ -22,7 +20,7 @@ function RecipeProvider({ children }) {
   const [foodIngredientsList, setFoodIngredientsList] = useState([]);
   const [drinkIngredientsList, setDrinkIngredientsList] = useState([]);
   const [foodByNationalities, setFoodByNationalities] = useState([]);
-  const [foodsCountry, setFoodsCountry] = useState(american.meals);
+  const [foodsCountry, setFoodsCountry] = useState([]);
 
   const fetchMeal = async () => {
     // 52771 id para teste
@@ -59,6 +57,7 @@ function RecipeProvider({ children }) {
   const foodRequest = async () => {
     const request = await foodApiRequest();
     setFoods(request);
+    setFoodsCountry(request);
     setDefaultFoods(request);
   };
 
@@ -82,8 +81,12 @@ function RecipeProvider({ children }) {
   };
 
   const foodAllByCountry = async (value) => {
-    const response = await foodsByCountry(value);
-    setFoodsCountry(response);
+    if (value === 'All') {
+      setFoodsCountry(foods);
+    } else {
+      const response = await foodsByCountry(value);
+      setFoodsCountry(response);
+    }
   };
 
   useEffect(() => {
