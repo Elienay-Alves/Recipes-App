@@ -11,6 +11,8 @@ const american = require('../helpers/mockAmerican');
 
 function RecipeProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
+  const [recipe, setRecipe] = useState({});
+  const [whatToFetch, setWhatToFetch] = useState('');
   const [foods, setFoods] = useState([]);
   const [defaultFoods, setDefaultFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
@@ -22,6 +24,32 @@ function RecipeProvider({ children }) {
   const [foodByNationalities, setFoodByNationalities] = useState([]);
   const [foodsCountry, setFoodsCountry] = useState(american.meals);
 
+  const fetchMeal = async () => {
+    // 52771 id para teste
+    const mealId = window.location.pathname.split('/')[2];
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setRecipe(data.meals[0]);
+  };
+
+  const fetchDrink = async () => {
+    // 178319 drinkId para teste
+    const drinkId = window.location.pathname.split('/')[2];
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setRecipe(data.drinks[0]);
+  };
+
+  useEffect(() => {
+    if (whatToFetch === 'meal') {
+      fetchMeal();
+    } else if (whatToFetch === 'drink') {
+      fetchDrink();
+    }
+  }, [whatToFetch]);
+  
   const drinkRequest = async () => {
     const request = await drinkApiRequest();
     setDrinks(request);
@@ -86,6 +114,8 @@ function RecipeProvider({ children }) {
     foodByNationalities,
     foodsCountry,
     foodAllByCountry,
+    setWhatToFetch,
+    recipe,
   };
 
   return (
@@ -96,7 +126,7 @@ function RecipeProvider({ children }) {
 }
 
 RecipeProvider.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default RecipeProvider;
