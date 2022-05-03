@@ -7,11 +7,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <RecipeProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <RecipeProvider>
       <App />
-    </BrowserRouter>
-  </RecipeProvider>,
+    </RecipeProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );
 

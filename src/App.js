@@ -18,6 +18,7 @@ import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreFoodsIngredients from './pages/ExploreFoodsIngredients';
 import ExploreDrinksIngredients from './pages/ExploreDrinksIngredients';
 import ExploreFoodsNationalities from './pages/ExploreFoodsNationalities';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+      <Route path="*" component={ NotFound } />
     </Switch>
   );
 }

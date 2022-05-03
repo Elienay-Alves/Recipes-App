@@ -1,12 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import CardIngredients from '../components/CardIngredients';
 
 function ExploreFoodsIngredients() {
   return (
     <>
       <Header title="Explore Ingredients" />
-      <h1>ExploreFoodsIngredients</h1>
+      <main>
+        <CardIngredients />
+      </main>
       <Footer />
     </>
   );
