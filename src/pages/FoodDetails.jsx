@@ -13,7 +13,7 @@ function FoodDetails() {
   useEffect(() => {
     setWhatToFetch('meal');
     setMeal(recipe);
-  }, [recipe]);
+  }, [recipe, setWhatToFetch]);
 
   return (
     <>
