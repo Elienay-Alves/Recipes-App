@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -9,6 +10,7 @@ function FavoriteRecipes() {
   useEffect(() => {
     setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
   }, []);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (filter === 'food') {
@@ -36,42 +38,69 @@ function FavoriteRecipes() {
   };
 
   const handleShare = (type, id) => {
-    const url = `localhost:3000/${type}/${id}`;
+    const url = `http://localhost:3000/${type}/${id}`;
     navigator.clipboard.writeText(url);
+    setCopied(true);
   };
-  const renderFavoriteFood = (recipe) => (
+  const renderFavoriteFood = (recipe, index) => (
     <div key={ recipe.id }>
-      <img src={ recipe.image } alt={ recipe.name } />
-      <p>{`${recipe.nationality} - ${recipe.type}`}</p>
-      <h3>{ recipe.name }</h3>
+      <Link to={ `/foods/${recipe.id}` }>
+        <img
+          src={ recipe.image }
+          alt={ recipe.name }
+          data-testid={ `${index}-horizontal-image` }
+        />
+        <p
+          data-testid={ `${index}-horizontal-top-text` }
+        >
+          {`${recipe.nationality} - ${recipe.category}`}
+        </p>
+        <h3 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h3>
+      </Link>
       <button
         type="button"
         onClick={ () => { handleShare('foods', recipe.id); } }
+        data-testid={ `${index}-horizontal-share-btn` }
+        src={ shareIcon }
       >
         <img src={ shareIcon } alt="share icon" />
       </button>
+      { copied && <p>Link copied!</p> }
       <button
         type="button"
         onClick={ () => handleFavorites(recipe.id) }
+        data-testid={ `${index}-horizontal-favorite-btn` }
+        src={ blackHeartIcon }
       >
         <img src={ blackHeartIcon } alt="favorite icon" />
       </button>
     </div>
   );
-  const renderFavoriteDrink = (recipe) => (
+  const renderFavoriteDrink = (recipe, index) => (
     <div key={ recipe.id }>
-      <img src={ recipe.image } alt={ recipe.name } />
-      <p>{ recipe.alcoholicOrNot}</p>
-      <h3>{ recipe.name }</h3>
+      <Link to={ `/drinks/${recipe.id}` }>
+        <img
+          src={ recipe.image }
+          alt={ recipe.name }
+          data-testid={ `${index}-horizontal-image` }
+        />
+        <p data-testid={ `${index}-horizontal-top-text` }>{ recipe.alcoholicOrNot}</p>
+        <h3 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h3>
+      </Link>
       <button
         type="button"
         onClick={ () => { handleShare('drinks', recipe.id); } }
+        data-testid={ `${index}-horizontal-share-btn` }
+        src={ shareIcon }
       >
         <img src={ shareIcon } alt="share icon" />
       </button>
+      { copied && <p>Link copied!</p> }
       <button
         type="button"
         onClick={ () => handleFavorites(recipe.id) }
+        data-testid={ `${index}-horizontal-favorite-btn` }
+        src={ blackHeartIcon }
       >
         <img src={ blackHeartIcon } alt="favorite icon" />
       </button>
@@ -85,27 +114,30 @@ function FavoriteRecipes() {
         <button
           type="button"
           onClick={ () => handleFilter('food') }
+          data-testid="filter-by-food-btn"
         >
           Food
         </button>
         <button
           type="button"
           onClick={ () => handleFilter('drink') }
+          data-testid="filter-by-drink-btn"
         >
           Drinks
         </button>
         <button
           type="button"
           onClick={ () => handleFilter('All') }
+          data-testid="filter-by-all-btn"
         >
           All
         </button>
       </div>
       <div>
-        {favoriteRecipes.map((recipe) => (
-          recipe.idDrink
-            ? renderFavoriteDrink(recipe)
-            : renderFavoriteFood(recipe)
+        {favoriteRecipes.map((recipe, index) => (
+          recipe.type === 'drink'
+            ? renderFavoriteDrink(recipe, index)
+            : renderFavoriteFood(recipe, index)
         ))}
       </div>
     </>
