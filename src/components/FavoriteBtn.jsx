@@ -36,6 +36,10 @@ function FavoriteBtn({ src, meal, drink, setFavoriteSrc }) {
       setFavoriteSrc(blackHeart);
     } else {
       setFavoriteSrc(whiteHeart);
+      const id = isMeal ? meal.idMeal : drink.idDrink;
+      const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+      const newFavorite = favoriteRecipes.filter((recipe) => recipe.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
     }
   };
   return (
