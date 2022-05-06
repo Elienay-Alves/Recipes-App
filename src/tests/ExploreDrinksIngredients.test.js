@@ -3,8 +3,8 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import ExploreDrinksIngredients from '../pages/ExploreDrinksIngredients';
 
-describe('Testa o componente App', () => {
-  test('Se o componente login possui dois inputs e um botao', () => {
+describe('Testa o componente ExploreDrinksIngredients', () => {
+  test('Se o componente possui um titulo', () => {
     renderWithRouter(<ExploreDrinksIngredients />);
     const title = screen.getByRole('heading', { level: 1 });
     expect(title).toBeInTheDocument();
