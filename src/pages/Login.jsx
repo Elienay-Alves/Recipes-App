@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const regex = /\S+@\S+\.\S+/;
@@ -16,9 +17,11 @@ function Login() {
   }, [email, password]);
 
   const handleButton = () => {
+    console.log('entrei');
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/foods');
   };
 
   return (
@@ -36,16 +39,14 @@ function Login() {
         value={ password }
         onChange={ (e) => setPassword(e.target.value) }
       />
-      <Link to="/foods">
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={ disabled }
-          onClick={ handleButton }
-        >
-          Enter
-        </button>
-      </Link>
+      <button
+        type="button"
+        data-testid="login-submit-btn"
+        disabled={ disabled }
+        onClick={ handleButton }
+      >
+        Enter
+      </button>
 
     </main>
   );
