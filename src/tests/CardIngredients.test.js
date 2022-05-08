@@ -30,7 +30,7 @@ describe('Testa o componente CardIngredients', () => {
   test('Se ao clickar no ingrediente é renderizado uma receita', async () => {
     const { customHistory } = renderWithRouter(<CardIngredients />);
     customHistory.push('/explore/foods/ingredients');
-    const ingredient = await screen.findByText(/Chicken/i);
+    const ingredient = await screen.findByText(/Salmon/i);
     userEvent.click(ingredient);
     expect(customHistory.location.pathname).toBe('/foods');
     const food = await screen.findByText(/Brown Stew Chicken/i);

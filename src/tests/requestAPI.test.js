@@ -2,6 +2,7 @@ import requestFood from '../services/requestAPI';
 
 describe('Testa a função requestAPI', () => {
   test('Se a função realiza um fetch', async () => {
+    global.alert = jest.fn();
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve({
         meals: [{ idMeal: 0 }],
@@ -18,11 +19,12 @@ describe('Testa a função requestAPI', () => {
     expect(typeof (requestFood)).toBe('function');
     expect(fetch).toHaveBeenCalledTimes(numberOfRequests);
   });
+
   test('Se a função retorna erro', async () => {
     global.fetch = jest.fn(() => Promise.reject(Error));
     await requestFood('/drinks', '', 'adsfadsfdsafasfdsafasfa');
     await requestFood('/foods', '', 'G');
     expect(typeof (requestFood)).toBe('function');
-    expect(fetch).rejects.toThrow(Error);
+    expect(global.alert).toHaveBeenCalled();
   });
 });
