@@ -37,26 +37,6 @@ function DetailsPageBtn({ meal, drink }) {
   };
 
   useEffect(() => {
-    // const doneRecipes = JSON.stringify([{
-    //   id: '52772',
-    //   type: 'comida-ou-bebida',
-    //   nationality: 'nacionalidade-da-receita-ou-texto-vazio',
-    //   category: 'categoria-da-receita-ou-texto-vazio',
-    //   alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-    //   name: 'nome-da-receita',
-    //   image: 'imagem-da-receita',
-    //   doneDate: 'quando-a-receita-foi-concluida',
-    //   tags: 'array-de-tags-da-receita-ou-array-vazio' }]);
-    // localStorage.setItem('doneRecipes', doneRecipes);
-    // const inProgress = JSON.stringify({
-    //   cocktails: {
-    //     11005: ['lista-de-ingredientes-utilizados'],
-    //   },
-    //   meals: {
-    //     52772: ['lista-de-ingredientes-utilizados'],
-    //   },
-    // });
-    // localStorage.setItem('inProgressRecipes', inProgress);
     handleBtnText();
   }, []);
 
