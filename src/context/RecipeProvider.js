@@ -21,6 +21,33 @@ function RecipeProvider({ children }) {
   const [drinkIngredientsList, setDrinkIngredientsList] = useState([]);
   const [foodByNationalities, setFoodByNationalities] = useState([]);
   const [foodsCountry, setFoodsCountry] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState([
+    {
+      id: '52771',
+      type: 'foods',
+      nationality: '',
+      category: 'Italian - Vegetarian',
+      alcoholicOrNot: '',
+      name: 'Spicy Arrabiata Penne',
+      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      doneDate: '23/06/2020',
+      tags: ['Pasta', 'Curry'],
+    },
+    {
+      id: '178319',
+      type: 'drinks',
+      nationality: '',
+      category: 'Alcoholic',
+      alcoholicOrNot: '',
+      name: 'Aquamarine',
+      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+      doneDate: 'Thu May 05 2022 18:17:39 GMT-0300 (Brasilia Standard Time)',
+      tags: ['Pasta', 'Curry'],
+    },
+  ]);
+
+  const [random, setRandom] = useState([]);
+  const [randomDrinks, setRandomDrinks] = useState([]);
 
   const fetchMeal = async () => {
     // 52771 id para teste
@@ -119,6 +146,12 @@ function RecipeProvider({ children }) {
     foodAllByCountry,
     setWhatToFetch,
     recipe,
+    doneRecipes,
+    setDoneRecipes,
+    random,
+    setRandom,
+    randomDrinks,
+    setRandomDrinks,
   };
 
   return (
