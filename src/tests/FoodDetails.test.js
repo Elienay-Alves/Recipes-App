@@ -5,6 +5,26 @@ import renderWithRouter from './renderWithRouter';
 import FoodDetails from '../pages/FoodDetails';
 import DetailsHeader from '../components/DetailsHeader';
 import DetailsPageBtn from '../components/DetailsPageBtn';
+import App from '../App';
+
+const mockkFavorite = [{
+  alcoholicOrNot: '',
+  category: 'Side',
+  idMeal: 52977,
+  strMealThumb: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+  strMeal: 'Corba',
+  nationality: 'Turkish',
+  type: 'food',
+},
+{
+  alcoholicOrNot: 'Alcoholic',
+  category: 'Cocktail',
+  id: '17222',
+  image: 'https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg',
+  name: 'A1',
+  nationality: '',
+  type: 'drink',
+}];
 
 describe('Testa o componente FoodDetails', () => {
   beforeEach(() => {
@@ -25,8 +45,7 @@ describe('Testa o componente FoodDetails', () => {
       name: 'A1',
       nationality: '',
       type: 'drink',
-    },
-    ];
+    }];
     global.localStorage.setItem('favoriteRecipes', JSON.stringify(mockFavorite));
   });
 
@@ -61,5 +80,22 @@ describe('Testa o componente FoodDetails', () => {
     userEvent.click(startRecipe);
     expect(customHistory.location.pathname).toBe('/drinks/undefined/in-progress');
     expect(localStorage.getItem).toHaveBeenCalled();
+  });
+
+  test('Se o componente DetailsPageBtn renderiza as instruções', async () => {
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(mockkFavorite),
+    }));
+    renderWithRouter(<App />);
+    const emailInput = screen.getByTestId('email-input');
+    const email = 'trybe@trybe.com';
+    const passwordInput = screen.getByTestId('password-input');
+    const password = '1234567';
+    const button = screen.getByTestId('login-submit-btn');
+    userEvent.type(passwordInput, password);
+    userEvent.type(emailInput, email);
+    userEvent.click(button);
+    const corba = await screen.findByText(/Corba/i);
+    expect(corba).toBeInTheDocument();
   });
 });
