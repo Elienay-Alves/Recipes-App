@@ -53,6 +53,7 @@ function RecipeProvider({ children }) {
     // 52771 id para teste
     const mealId = window.location.pathname.split('/')[2];
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
+    console.log(url);
     const response = await fetch(url);
     const data = await response.json();
     setRecipe(data.meals[0]);

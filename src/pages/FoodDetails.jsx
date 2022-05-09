@@ -13,7 +13,6 @@ function FoodDetails() {
   useEffect(() => {
     setWhatToFetch('meal');
     setMeal(recipe);
-    console.log(recipe);
   }, [recipe, setWhatToFetch]);
 
   return (
